@@ -95,7 +95,7 @@ database_name = "cf-webhook-db"
 database_id = "${D1_DATABASE_ID}"
 
 [env.production]
-name = "cf-webhook"
+name = "wh"
 
 [env.production.vars]
 NODE_ENV = "production"
