@@ -1,0 +1,121 @@
+# For more details on how to configure Wrangler, refer to:
+# https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "wh"
+main = ".open-next/worker.js"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+[assets]
+binding = "ASSETS"
+directory = ".open-next/assets"
+
+[observability]
+enabled = true
+
+# Smart Placement - Intelligent deployment optimization
+# Automatically selects the optimal data center based on user location
+[placement]
+mode = "smart"
+
+[vars]
+NODE_ENV = "development"
+ENABLE_WEBSOCKET = "false"
+POLL_INTERVAL = "5000"
+MAX_REQUESTS_PER_WEBHOOK = "100"
+REQUEST_RETENTION_HOURS = "24"
+APP_NAME = "CF-Webhook"
+APP_VERSION = "1.0.0"
+RATE_LIMIT_ENABLED = "true"
+RATE_LIMIT_REQUESTS = "60"
+RATE_LIMIT_WINDOW = "10"
+DEFAULT_THEME = "auto"
+ENABLE_NOTIFICATIONS = "true"
+LOCAL_STORAGE_PREFIX = "cf-webhook"
+STORAGE_PROVIDER = "d1"
+STORAGE_TABLE_PREFIX = "webhook"
+DEBUG_STORAGE = "false"
+
+[[d1_databases]]
+binding = "WEBHOOK_DB"
+database_name = "wh"
+database_id = "62594ec7-54fc-4908-a78e-14901c690c5c"
+
+
+[env.preview]
+name = "cf-webhook-preview"
+
+[env.preview.vars]
+NODE_ENV = "preview"
+ENABLE_WEBSOCKET = "false"
+POLL_INTERVAL = "5000"
+MAX_REQUESTS_PER_WEBHOOK = "100"
+REQUEST_RETENTION_HOURS = "24"
+APP_NAME = "CF-Webhook"
+APP_VERSION = "1.0.0"
+RATE_LIMIT_ENABLED = "true"
+RATE_LIMIT_REQUESTS = "60"
+RATE_LIMIT_WINDOW = "10"
+DEFAULT_THEME = "auto"
+ENABLE_NOTIFICATIONS = "true"
+LOCAL_STORAGE_PREFIX = "cf-webhook"
+STORAGE_PROVIDER = "d1"
+STORAGE_TABLE_PREFIX = "webhook"
+DEBUG_STORAGE = "false"
+
+[[env.preview.d1_databases]]
+binding = "WEBHOOK_DB"
+database_name = "cf-webhook-db"
+database_id = "${D1_DATABASE_ID}"
+
+[env.staging]
+name = "cf-webhook-staging"
+
+[env.staging.vars]
+NODE_ENV = "staging"
+ENABLE_WEBSOCKET = "false"
+POLL_INTERVAL = "5000"
+MAX_REQUESTS_PER_WEBHOOK = "100"
+REQUEST_RETENTION_HOURS = "24"
+APP_NAME = "CF-Webhook"
+APP_VERSION = "1.0.0"
+RATE_LIMIT_ENABLED = "true"
+RATE_LIMIT_REQUESTS = "60"
+RATE_LIMIT_WINDOW = "10"
+DEFAULT_THEME = "auto"
+ENABLE_NOTIFICATIONS = "true"
+LOCAL_STORAGE_PREFIX = "cf-webhook"
+STORAGE_PROVIDER = "d1"
+STORAGE_TABLE_PREFIX = "webhook"
+DEBUG_STORAGE = "false"
+
+[[env.staging.d1_databases]]
+binding = "WEBHOOK_DB"
+database_name = "cf-webhook-db"
+database_id = "${D1_DATABASE_ID}"
+
+[env.production]
+name = "cf-webhook"
+
+[env.production.vars]
+NODE_ENV = "production"
+ENABLE_WEBSOCKET = "false"
+POLL_INTERVAL = "5000"
+MAX_REQUESTS_PER_WEBHOOK = "1000"
+REQUEST_RETENTION_HOURS = "24"
+APP_NAME = "CF-Webhook"
+APP_VERSION = "1.0.0"
+RATE_LIMIT_ENABLED = "true"
+RATE_LIMIT_REQUESTS = "60"
+RATE_LIMIT_WINDOW = "10"
+DEFAULT_THEME = "auto"
+ENABLE_NOTIFICATIONS = "true"
+LOCAL_STORAGE_PREFIX = "cf-webhook"
+STORAGE_PROVIDER = "d1"
+STORAGE_TABLE_PREFIX = "webhook"
+DEBUG_STORAGE = "false"
+
+# [[env.production.d1_databases]]
+# binding = "WEBHOOK_DB"
+# database_name = "cf-webhook-db"
+# database_id = "${D1_DATABASE_ID}"
