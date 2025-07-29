@@ -62,7 +62,7 @@ function parseQueryParams(url: URL): Record<string, string> {
 // Main handler function for all HTTP methods
 async function handleRequest(
   request: NextRequest,
-  context: { params: { params: string[] } }
+  context: { params: { params?: string[] } }
 ) {
   const allSegments = context.params?.params || [];
   if (allSegments.length < 1) {
@@ -218,25 +218,25 @@ async function handleRequest(
 }
 
 // Export handlers for all HTTP methods
-export async function GET(request: NextRequest, context: { params: { params: string[] } }) {
+export async function GET(request: NextRequest, context: { params: { params?: string[] } }) {
   return handleRequest(request, context);
 }
-export async function POST(request: NextRequest, context: { params: { params: string[] } }) {
+export async function POST(request: NextRequest, context: { params: { params?: string[] } }) {
   return handleRequest(request, context);
 }
-export async function PUT(request: NextRequest, context: { params: { params: string[] } }) {
+export async function PUT(request: NextRequest, context: { params: { params?: string[] } }) {
   return handleRequest(request, context);
 }
-export async function DELETE(request: NextRequest, context: { params: { params: string[] } }) {
+export async function DELETE(request: NextRequest, context: { params: { params?: string[] } }) {
   return handleRequest(request, context);
 }
-export async function PATCH(request: NextRequest, context: { params: { params: string[] } }) {
+export async function PATCH(request: NextRequest, context: { params: { params?: string[] } }) {
   return handleRequest(request, context);
 }
-export async function HEAD(request: NextRequest, context: { params: { params: string[] } }) {
+export async function HEAD(request: NextRequest, context: { params: { params?: string[] } }) {
   return handleRequest(request, context);
 }
-export async function OPTIONS(_request: NextRequest, _context: { params: { params: string[] } }) {
+export async function OPTIONS(_request: NextRequest, _context: { params: { params?:  string[] } }) {
   return new NextResponse(null, {
     status: 200,
     headers: {
